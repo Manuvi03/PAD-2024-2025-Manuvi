@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         data.putDouble("x_value",Double.parseDouble(editTextX.getText().toString()));
         data.putDouble("y_value",Double.parseDouble(editTextY.getText().toString()));
         intent.putExtra("datos",data);*/
+        //prueba para merge de branch develop
         startActivity(intent);
     }
 }
