@@ -31,6 +31,10 @@ public class CalculatorResultActivity extends AppCompatActivity {
     {
         Intent intent = getIntent();
         //cogemos el valor del intent que es double lo pasamos a string y se lo ponemos al textView
-        solution.setText(String.valueOf(intent.getDoubleExtra("solucion",0)));
+        Double result = intent.getDoubleExtra("solucion",0);
+
+        String text;
+        text = String.format("%.3f",result);
+        solution.setText(text);
     }
 }
