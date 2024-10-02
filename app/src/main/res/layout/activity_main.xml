@@ -14,12 +14,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:inputType="numberDecimal"
         android:hint="@string/label_x"
+        android:inputType="numberDecimal"
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toTopOf="@+id/button_sumar"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/editTextY_view"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextY_view"
@@ -28,11 +28,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:inputType="numberDecimal"
         android:hint="@string/label_y"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/button_sumar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextX_view" />
 
     <!-- El boton esta constrained en relacion al layout inicial, el resto
@@ -42,8 +41,8 @@
         android:id="@+id/button_sumar"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:text="@string/boton_sumar"
         android:onClick="addXandY"
+        android:text="@string/boton_sumar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
