@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CalculatorResultActivity.class);
         intent.putExtra("solucion",calculator.suma(Double.parseDouble(editTextX.getText().toString()),
                 Double.parseDouble(editTextY.getText().toString())));
-        /*Bundle data = new Bundle();
-        data.putDouble("x_value",Double.parseDouble(editTextX.getText().toString()));
-        data.putDouble("y_value",Double.parseDouble(editTextY.getText().toString()));
-        intent.putExtra("datos",data);*/
-        //prueba para merge de branch develop
-        //otra para probar
         startActivity(intent);
     }
 }
