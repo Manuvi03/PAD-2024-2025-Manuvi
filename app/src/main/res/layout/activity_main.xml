@@ -14,10 +14,13 @@
         android:id="@+id/editTextX_view"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/light_grey"
         android:ems="10"
         android:hint="@string/label_x"
         android:inputType="numberDecimal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constrainedHeight="false"
         app:layout_constraintEnd_toStartOf="@+id/editTextY_view"
         app:layout_constraintHorizontal_bias="0.5"
@@ -31,25 +34,32 @@
         android:ems="10"
         android:hint="@string/label_y"
         android:inputType="numberDecimal"
+        android:backgroundTint="@color/light_grey"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextX_view"
         app:layout_constraintTop_toTopOf="@+id/editTextX_view" />
 
-    <Button
+    <!-- los MaterialButtons no soportan cambiar el fondo por otro drawable, probando
+    las soluciones propuestas por desarrolladores (backgroundTint = @null) y cambiar el theme
+    por DayNight.actionBar.Bridge tampoco han funcionado al final he tenido que utilizar botones
+    de la api AppCompat-->
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button3"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="3"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toStartOf="@+id/add_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/editTextY_view" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="1"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -57,11 +67,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextX_view" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
 
         android:id="@+id/add_button"
         style="@style/op_button_style"
-        android:onClick="addXandY"
         android:text="@string/boton_sumar"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,109 +78,111 @@
         app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/editTextY_view" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button6"
         style="@style/op_button_style"
-        android:text="Button"
+        android:text="="
         app:layout_constraintBottom_toTopOf="@+id/button11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/add_button" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button7"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="6"
         app:layout_constraintBottom_toTopOf="@+id/button10"
         app:layout_constraintEnd_toStartOf="@+id/button6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button5"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button4"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="4"
         app:layout_constraintBottom_toTopOf="@+id/button8"
         app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button8"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="7"
         app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toStartOf="@+id/button9"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button9"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="8"
         app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toStartOf="@+id/button10"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button5"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="5"
         app:layout_constraintBottom_toTopOf="@+id/button9"
         app:layout_constraintEnd_toStartOf="@+id/button7"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button2"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="2"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/editTextX_view" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button13"
         style="@style/num_button_style"
         android:layout_height="100dp"
-        android:text="Button"
+        android:layout_marginBottom="8dp"
+        android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button11"
+        app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button10"
         style="@style/num_button_style"
-        android:text="Button"
+        android:text="9"
         app:layout_constraintBottom_toTopOf="@+id/button13"
         app:layout_constraintEnd_toStartOf="@+id/button11"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button9"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button11"
         style="@style/op_button_style"
-        android:text="Button"
+        android:text="."
         app:layout_constraintBottom_toTopOf="@+id/button12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button12"
         style="@style/op_button_style"
-        android:text="Button"
+        android:text="C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

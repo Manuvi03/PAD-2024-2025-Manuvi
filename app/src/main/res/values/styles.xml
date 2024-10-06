@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- el boton hereda de material Design es decir es un MaterialButton-->
-    <style name = "num_button_style" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginRight">5dp</item>W
-
-    </style>
-
-    <style name="op_button_style" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_width">80dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:textSize">18sp</item>
+    <!-- Estilo base con las propiedades comunes -->
+    <style name="button_base_style" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">25sp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
+        <item name="android:background">@drawable/num_button</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Estilo para el botón numérico, hereda del estilo base -->
+    <style name="num_button_style" parent="button_base_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+
+    <style name="op_button_style" parent="button_base_style">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">0dp</item>
     </style>
 </resources>
