@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(editTextX.getText() != null && editTextY != null)
+                if(!editTextX.getText().toString().isEmpty() && !editTextY.getText().toString().isEmpty())
                 {
                     addXandY(view);
                 }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button11).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!currentText.getText().toString().contains("."))
+                if(!currentText.getText().toString().contains(".") && !currentText.getText().toString().isEmpty())
                 {
                     currentText.append(".");
                 }
