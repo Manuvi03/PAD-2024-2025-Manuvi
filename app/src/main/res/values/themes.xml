@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Calculator" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/white</item>
+        <item name="android:background">@drawable/blue_gradient</item>
+
     </style>
 
     <style name="Theme.Calculator" parent="Base.Theme.Calculator" />

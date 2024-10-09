@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Calculator</string>
     <string name="boton_sumar">+</string>
-    <string name="label_x">Introduzca X</string>
+    <string name="label_x">Enter X</string>
     <string name="label_y">Introduzca Y</string>
     <string name="sum_default">0</string>
-    <string name="error_addXandY">Error:introduzca el numero Y</string>
+    <string name="error_addXandY">Error:Enter the Y value</string>
 </resources>

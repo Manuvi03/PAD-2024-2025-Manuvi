@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addXandY(View view)
     {
-        Log.i(TAG,"Llega a la funcion addXandY");
+        Log.i(TAG,"Funcion addXandY");
         Intent intent = new Intent(this, CalculatorResultActivity.class);
         intent.putExtra("solucion",calculator.suma(Double.parseDouble(editTextX.getText().toString()),
                 Double.parseDouble(editTextY.getText().toString())));
@@ -86,9 +87,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!editTextX.getText().toString().isEmpty() && !editTextY.getText().toString().isEmpty())
-                {
+                try{
+
                     addXandY(view);
+                }catch(Exception e){
+                    String text = getResources().getString(R.string.error_addXandY);
+                    Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
                 }
             }
         });
