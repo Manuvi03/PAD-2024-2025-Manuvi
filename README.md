@@ -1,7 +1,7 @@
 <div dir = rtl>
 
 <div align = "center">
-# Calculadora PAD #
+# Calculadora PAD 
 
 Practica 1
 
