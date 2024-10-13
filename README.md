@@ -2,11 +2,11 @@
 
 ## Bienvenidos al repositorio de **Programación de Aplicaciones Móviles (PAD)**
 
-Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea**
+Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea 🌸📖**
 
 ---
 
-### [**📚 Contenidos Teóricos **](Contenidos_Teoricos)
+### [📚 Contenidos Teóricos](Contenidos_Teoricos)
 
 #### [General](Contenidos_Teoricos/General)
 1. [Introducción al desarrollo móvil](Contenidos_Teoricos/General/02_01_Introduccion_desarrollo_movil.pdf)
@@ -24,7 +24,7 @@ Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea**
 
 ---
 
-### **🚀 Prácticas **
+### 🚀 Prácticas
 1. [Práctica 1: Calculadora](Practica1-Calculadora)
 2. [Práctica 2: Libreria]
 3. [Práctica 3: Por definir] 
