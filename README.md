@@ -21,6 +21,9 @@ Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea 🌸�
 6. [Librerías de compatibilidad](/Contenidos_Teoricos/Android/06_SupportLibraries.pdf)
 7. [RecyclerView](/Contenidos_Teoricos/Android/07_RecyclerView.pdf)
 8. [Conexión a Internet](/Contenidos_Teoricos/Android/08_Internet%20connection.pdf)
+9. [Notificaciones](/Contenidos_Teoricos/Android/09.Notificaciones.pdf)
+10. [Alarmas](/Contenidos_Teoricos/Android/10_Alarmas.pdf)
+11. [Programar Tareas (JobScheduler)](/Contenidos_Teoricos/Android/11_ProgramarTareas_JobScheduler.pdf)
 
 ---
 
