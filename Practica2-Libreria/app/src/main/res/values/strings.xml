@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GoggleBooksClient</string>
+    <string name="titulo_name">Título</string>
+    <string name="autor_name">Autor</string>
 </resources>
