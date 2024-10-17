@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.loader.app.LoaderManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BookLoaderCallbacks bookLoaderCallbacks = new BookLoaderCallbacks(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +22,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        LoaderManager loaderManager = LoaderManager.getInstance(this);
+        if(loaderManager.getLoader(BOOK_LOADER_ID) != null) {
+            loaderManager.initLoader(BOOK_LOADER_ID,null,bookLoaderCallbacks);
+        }
     }
 }
