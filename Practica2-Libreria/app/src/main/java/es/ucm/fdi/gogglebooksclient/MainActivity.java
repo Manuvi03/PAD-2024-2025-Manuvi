@@ -1,6 +1,9 @@
 package es.ucm.fdi.gogglebooksclient;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +27,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         LoaderManager loaderManager = LoaderManager.getInstance(this);
-        if(loaderManager.getLoader(BOOK_LOADER_ID) != null) {
-            loaderManager.initLoader(BOOK_LOADER_ID,null,bookLoaderCallbacks);
+        if (loaderManager.getLoader(BOOK_LOADER_ID) != null) {
+            loaderManager.initLoader(BOOK_LOADER_ID, null, bookLoaderCallbacks);
         }
+
+        ImageButton busqueda = findViewById(R.id.imageButton);
+        busqueda.setOnClickListener(v -> new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    searchBooks(v);
+                }
+        });
+
+    }
+
+    public void searchBooks (View view){
+        Bundle queryBundle = new Bundle();
+        queryBundle.putString(BookLoaderCallbacks.EXTRA_QUERY, queryString);
+        queryBundle.putString(BookLoaderCallbacks.EXTRA_PRINT_TYPE, printType);
+        LoaderManager.getInstance(this).restartLoader(BOOK_LOADER_ID,
+                queryBundle, bookLoaderCallbacks);
     }
 }
