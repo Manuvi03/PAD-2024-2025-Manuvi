@@ -24,6 +24,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<S
     @NonNull
     @Override
     public Loader<List<String>> onCreateLoader(int id, @Nullable Bundle args) {
+        assert args != null;
         return new BookLoader(context,args.getString(EXTRA_QUERY), args.getString(EXTRA_PRINT_TYPE));
     }
 
