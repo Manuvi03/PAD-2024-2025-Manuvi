@@ -13,6 +13,8 @@ import java.util.List;
 public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<String>>{
 
     private final Context context;
+    public static final String EXTRA_QUERY = "queryString";
+    public static final String EXTRA_PRINT_TYPE = "printType";
 
     public BookLoaderCallbacks(Context context)
     {
@@ -22,7 +24,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<S
     @NonNull
     @Override
     public Loader<List<String>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new BookLoader(context);
+        return new BookLoader(context,args.getString(EXTRA_QUERY), args.getString(EXTRA_PRINT_TYPE));
     }
 
     @Override

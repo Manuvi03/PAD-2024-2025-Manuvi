@@ -10,13 +10,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class BookLoader extends AsyncTaskLoader<List<String>> {
-    public BookLoader(@NonNull Context context) {
+
+    public BookLoader(@NonNull Context context,String queryString, String printType) {
         super(context);
     }
 
     @Nullable
     @Override
     public List<String> loadInBackground() {
+
         return Collections.emptyList();
     }
 
