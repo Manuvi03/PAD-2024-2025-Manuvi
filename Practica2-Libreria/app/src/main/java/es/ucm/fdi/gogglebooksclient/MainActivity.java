@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     String text = editText.getText().toString();
                     //comprobamos que el usuario haya introducido texto y mandamos un mensaje toast si no lo ha hecho
-                    if(text == null)
+                    if(text == null && text.isBlank())
                     {
                         CharSequence msg = getResources().getString(R.string.error_text);
                         Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
