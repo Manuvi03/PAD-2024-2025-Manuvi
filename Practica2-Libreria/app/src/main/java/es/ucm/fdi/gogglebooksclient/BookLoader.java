@@ -14,6 +14,7 @@ public class BookLoader extends AsyncTaskLoader<List<String>> {
     private String queryString;
     private String printType;
 
+
     public BookLoader(@NonNull Context context,String queryString, String printType) {
         super(context);
         this.queryString = queryString;
@@ -34,7 +35,7 @@ public class BookLoader extends AsyncTaskLoader<List<String>> {
 
     public List<String> getBookInfoJson(String queryString, String printType)
     {
-        return Collections.emptyList();
+
     }
 
 

@@ -58,6 +58,6 @@ public class BookInfo {
         this.infoLink = url;
     }
     static List<BookInfo> fromJsonResponse(String s){
-
+        return null;
     }
 }
