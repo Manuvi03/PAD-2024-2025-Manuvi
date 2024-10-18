@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">GoggleBooksClient</string>
-    <string name="titulo_name">Título</string>
-    <string name="autor_name">Autor</string>
+    <string name="libro_string">Libro</string>
+    <string name="titulo_string">Título</string>
+    <string name="autor_string">Autor</string>
+    <string name="revista_string">Revista</string>
+    <string name="ambas_string">Ambas</string>
     <string name="error_text">Introduzca el nombre del autor o el titulo</string>
+    <string name="TokenAPI">AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU</string>
 </resources>
