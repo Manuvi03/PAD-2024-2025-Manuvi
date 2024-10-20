@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int BOOK_LOADER_ID = 1;
     private String queryString;
     private String printType;
-    private EditText editText;
+    private EditText editTextTitulo;
+    private EditText editTextAutor;
     private RadioButton selectedButton;
 
     private BookLoaderCallbacks bookLoaderCallbacks = new BookLoaderCallbacks(this);
@@ -52,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        editText = findViewById(R.id.editText);
+        editTextTitulo = findViewById(R.id.editTextTitulo);
+        editTextAutor = findViewById(R.id.editTextAutor);
         //listener del boton de busqueda que al realizar el click al boton se llama al metodo searchbooks
         ImageButton busqueda = findViewById(R.id.imageButton);
         busqueda.setOnClickListener(v -> new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String text = editText.getText().toString();
+                    String text = editTextTitulo.getText().toString();
                     //comprobamos que el usuario haya introducido texto y mandamos un mensaje toast si no lo ha hecho
                     if(text == null && text.isBlank())
                     {

@@ -7,4 +7,5 @@
     <string name="ambas_string">Ambas</string>
     <string name="error_text">Introduzca el nombre del autor o el titulo</string>
     <string name="TokenAPI">AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU</string>
+    <string name="buscar_string">Buscar</string>
 </resources>

@@ -5,31 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_image"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/editTextTitulo"
-        android:layout_width="322dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:autofillHints=""
         android:hint="@string/titulo_string"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextAutor"
-        android:layout_width="322dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
+        android:autofillHints=""
         android:hint="@string/autor_string"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitulo" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="407dp"
+        android:layout_width="0dp"
         android:layout_height="59dp"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
@@ -43,7 +47,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:buttonTint="@color/brown"
+            android:checked="true"
             android:text="@string/libro_string"
+            android:textColorHighlight="@color/brown"
+            android:textColorHint="@color/brown"
+            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp" />
 
@@ -52,7 +61,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:buttonTint="@color/brown"
             android:text="@string/revista_string"
+            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="278dp" />
 
@@ -61,7 +72,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:buttonTint="@color/brown"
             android:text="@string/ambas_string"
+            android:textColorHighlight="@color/brown"
+            android:textColorHint="@color/brown"
+            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp" />
 
@@ -69,11 +84,11 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="60dp"
-        android:layout_height="92dp"
+        android:layout_width="56dp"
+        android:layout_height="94dp"
         android:layout_marginTop="16dp"
-
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/buscar_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
@@ -81,7 +96,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="409dp"
         android:layout_height="543dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="187dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
