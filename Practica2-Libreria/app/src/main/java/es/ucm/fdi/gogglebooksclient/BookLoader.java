@@ -55,6 +55,5 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         List<BookInfo> result = BookInfo.fromJsonResponse(jsonResponse);
         urlConnection.disconnect();
         return result;
-
     }
 }
