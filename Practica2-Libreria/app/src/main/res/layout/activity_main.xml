@@ -50,7 +50,6 @@
             android:buttonTint="@color/brown"
             android:checked="true"
             android:text="@string/libro_string"
-            android:textColorHighlight="@color/brown"
             android:textColorHint="@color/brown"
             android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"

@@ -3,6 +3,7 @@ package es.ucm.fdi.gogglebooksclient;
 import java.net.URL;
 import java.util.List;
 
+
 public class BookInfo {
     private String title;
     private String authors;

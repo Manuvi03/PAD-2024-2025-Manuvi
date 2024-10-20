@@ -1,26 +1,24 @@
 package es.ucm.fdi.gogglebooksclient;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class BookLoader extends AsyncTaskLoader<List<String>> {
+public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
     String queryString;
     String printType;
-    String URL_BASE = "https://www.googleapis.com/books/v1/volumes?";
+    String URL_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
 
     public BookLoader(@NonNull Context context,String queryString, String printType) {
         super(context);
@@ -30,7 +28,7 @@ public class BookLoader extends AsyncTaskLoader<List<String>> {
 
     @Nullable
     @Override
-    public List<String> loadInBackground() {
+    public List<BookInfo> loadInBackground() {
         try {
             return getBookInfoJson(queryString, printType);
         } catch (Exception e) {
@@ -43,32 +41,20 @@ public class BookLoader extends AsyncTaskLoader<List<String>> {
         forceLoad();
     }
 
-    public List<String> getBookInfoJson(String queryString, String printType) throws IOException {
+    public List<BookInfo> getBookInfoJson(String queryString, String printType) throws IOException {
 
-        URL url = new URL(URL_BASE+queryString);
+        URL url = new URL(URL_BASE+queryString+"&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+        Log.i("URL", url.toString());
         //Uri uri = Uri.parse(URL_BASE).buildUpon().appendQueryParameter("inAuthors", queryString).
           //      appendQueryParameter("printType", printType).build();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
         urlConnection.connect();
 
-        InputStream inputStream = urlConnection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        String line;
-        List<String> result = new ArrayList<>();
-        while((line = reader.readLine())!= null){
-            result.add(line);
-        }
-
+        String jsonResponse = new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).readLine();
+        List<BookInfo> result = BookInfo.fromJsonResponse(jsonResponse);
+        urlConnection.disconnect();
         return result;
 
     }
-
-
-
-
-
-
-
 }
