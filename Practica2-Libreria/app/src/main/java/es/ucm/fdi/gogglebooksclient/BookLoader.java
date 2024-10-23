@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
@@ -43,10 +44,18 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
     public List<BookInfo> getBookInfoJson(String queryString, String printType) throws IOException {
 
-        URL url = new URL(URL_BASE+queryString+"&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+        URL url;
+        if(Objects.equals(printType, "Revista")){
+            url = new URL(URL_BASE + queryString + "&printType=" + "magazines"+ "&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+        }
+        else if(Objects.equals(printType, "Libro")) {
+            url = new URL(URL_BASE + queryString + "&printType=" + "books"+ "&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+        }
+        else{
+            url = new URL(URL_BASE + queryString +"&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+        }
         Log.i("URL", url.toString());
-        //Uri uri = Uri.parse(URL_BASE).buildUpon().appendQueryParameter("inAuthors", queryString).
-          //      appendQueryParameter("printType", printType).build();
+
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
         urlConnection.connect();
