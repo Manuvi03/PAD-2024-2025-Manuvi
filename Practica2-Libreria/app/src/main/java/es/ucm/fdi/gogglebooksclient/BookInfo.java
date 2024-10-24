@@ -61,9 +61,6 @@ public class BookInfo {
     public void setPages(int pages) {
         this.pages = pages;
     }
-    public void setURL(URL url) {
-        this.infoLink = url;
-    }
 
     static List<BookInfo> fromJsonResponse(String s){
         List<BookInfo> bookList = new ArrayList<>();
@@ -73,35 +70,73 @@ public class BookInfo {
             Log.i("JSON", jsonBooks.toString());
 
             for(int i = 0; i < jsonBooks.length(); i++){
-                JSONObject book = jsonBooks.getJSONObject(i);
-                JSONObject info = book.getJSONObject("volumeInfo");
+                try {
+                    JSONObject book = jsonBooks.getJSONObject(i);
+                    JSONObject info = book.getJSONObject("volumeInfo");
 
-                String title = info.getString("title");
-                String description = "";
-                if(!info.getString("description").isEmpty()) {
-                    description = info.getString("description");
-                }
-                String sLink ="";
-                if(!info.getString("infoLink").isEmpty()){
-                    sLink = info.getString("infoLink");
-                }
+                    // Obtener el título (esto es obligatorio, así que no necesita try-catch)
+                    String title = info.getString("title");
 
-                URL infoLink = new URL(sLink);
-                int pages = info.getInt("pageCount");
-
-                StringBuilder authors = new StringBuilder();
-                JSONArray jsonAuthors = info.optJSONArray("authors");
-                if(jsonAuthors != null){
-                    for (int j = 0; j < jsonAuthors.length(); j++){
-                        authors.append(jsonAuthors.getString(j));
-                        if(j < jsonAuthors.length() - 1)
-                            authors.append(", ");
+                    // Intentar obtener la descripción
+                    String description = "";
+                    try {
+                        if (!info.getString("description").isEmpty()) {
+                            description = info.getString("description");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Descripción no disponible: " + e.getMessage());
                     }
-                }
-                BookInfo bookInfo = new BookInfo(title, authors.toString(), infoLink, description, pages);
-                bookList.add(bookInfo);
 
+                    // Intentar obtener el infoLink
+                    String sLink = "";
+                    try {
+                        if (!info.getString("infoLink").isEmpty()) {
+                            sLink = info.getString("infoLink");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("InfoLink no disponible: " + e.getMessage());
+                    }
+
+                    // Convertir sLink a URL
+                    URL infoLink = null;
+                    try {
+                        infoLink = new URL(sLink);
+                    } catch (Exception e) {
+                        System.out.println("URL no válida: " + e.getMessage());
+                    }
+
+                    // Intentar obtener el número de páginas
+                    int pages = 0;
+                    try {
+                        pages = info.getInt("pageCount");
+                    } catch (Exception e) {
+                        System.out.println("Número de páginas no disponible: " + e.getMessage());
+                    }
+
+                    // Intentar obtener los autores
+                    StringBuilder authors = new StringBuilder();
+                    try {
+                        JSONArray jsonAuthors = info.optJSONArray("authors");
+                        if (jsonAuthors != null) {
+                            for (int j = 0; j < jsonAuthors.length(); j++) {
+                                authors.append(jsonAuthors.getString(j));
+                                if (j < jsonAuthors.length() - 1)
+                                    authors.append(", ");
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Autores no disponibles: " + e.getMessage());
+                    }
+
+                    // Crear y agregar el objeto BookInfo
+                    BookInfo bookInfo = new BookInfo(title, authors.toString(), infoLink, description, pages);
+                    bookList.add(bookInfo);
+
+                } catch (Exception e) {
+                    System.out.println("Error procesando el libro: " + e.getMessage());
+                }
             }
+
 
         } catch (Exception ignored){}
 
