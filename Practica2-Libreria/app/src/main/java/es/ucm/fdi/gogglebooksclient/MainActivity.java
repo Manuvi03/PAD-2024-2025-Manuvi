@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 queryString = "intitle:" + editTextTitulo.getText().toString();
             } else { //Libro o ambas
                 // Comprobamos que los campos no estén vacíos
-                Log.i("dfsfd", "Entro a libros");
+                Log.i(this.getClass().getName(), "Entro a libros");
                 if (editTextTitulo.getText().toString().isEmpty() && editTextAutor.getText().toString().isEmpty()) {
-                    Log.i("dfd", "No hay argumentos");
+                    Log.i(this.getClass().getName(), "Entro a libros");
                     Toast.makeText(MainActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            Toast.makeText(MainActivity.this, queryString, Toast.LENGTH_SHORT).show();
             //Llamamos al método searchBooks
             searchBooks(v);
             queryString = "";
