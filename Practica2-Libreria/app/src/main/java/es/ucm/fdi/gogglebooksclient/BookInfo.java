@@ -1,5 +1,7 @@
 package es.ucm.fdi.gogglebooksclient;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -67,33 +69,41 @@ public class BookInfo {
         List<BookInfo> bookList = new ArrayList<>();
         try {
             JSONObject json = new JSONObject(s);
-            JSONArray jsonBooks = new JSONArray(json.getJSONArray("items"));
+            JSONArray jsonBooks = json.getJSONArray("items");
+            Log.i("JSON", jsonBooks.toString());
 
             for(int i = 0; i < jsonBooks.length(); i++){
                 JSONObject book = jsonBooks.getJSONObject(i);
                 JSONObject info = book.getJSONObject("volumeInfo");
 
                 String title = info.getString("title");
-                String description = info.getString("description");
-                String sLink = info.getString("infoLink");
+                String description = "";
+                if(!info.getString("description").isEmpty()) {
+                    description = info.getString("description");
+                }
+                String sLink ="";
+                if(!info.getString("infoLink").isEmpty()){
+                    sLink = info.getString("infoLink");
+                }
+
                 URL infoLink = new URL(sLink);
                 int pages = info.getInt("pageCount");
 
-                String authors = "";
+                StringBuilder authors = new StringBuilder();
                 JSONArray jsonAuthors = info.optJSONArray("authors");
                 if(jsonAuthors != null){
                     for (int j = 0; j < jsonAuthors.length(); j++){
-                        authors += jsonAuthors.getString(j);
+                        authors.append(jsonAuthors.getString(j));
                         if(j < jsonAuthors.length() - 1)
-                            authors += ", ";
+                            authors.append(", ");
                     }
                 }
-                BookInfo bookInfo = new BookInfo(title, authors, infoLink, description, pages);
+                BookInfo bookInfo = new BookInfo(title, authors.toString(), infoLink, description, pages);
                 bookList.add(bookInfo);
 
             }
 
-        } catch (Exception e){}
+        } catch (Exception ignored){}
 
         return bookList;
     }

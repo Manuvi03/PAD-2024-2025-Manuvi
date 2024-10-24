@@ -60,7 +60,16 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         urlConnection.setRequestMethod("GET");
         urlConnection.connect();
 
-        String jsonResponse = new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).readLine();
+        // Lee todo el contenido del input stream y guárdalo en jsonResponse
+        BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+
+        String jsonResponse = response.toString(); // Convertir el StringBuilder a String
         List<BookInfo> result = BookInfo.fromJsonResponse(jsonResponse);
         urlConnection.disconnect();
         return result;
