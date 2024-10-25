@@ -1,13 +1,22 @@
 <resources>
+    <!-- nombre de la aplicación -->
     <string name="app_name">GoogleBooksClient</string>
+
+    <!-- textos de la vista -->
     <string name="libro_string">Libro</string>
     <string name="titulo_string">Título</string>
     <string name="autor_string">Autor</string>
     <string name="paginas_string">101</string>
     <string name="revista_string">Revista</string>
     <string name="ambas_string">Ambas</string>
-    <string name="TokenAPI">AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU</string>
     <string name="buscar_string">Buscar</string>
-    <string name="error_text">Introduzca el nombre del autor o el titulo</string>
-    <string name="error_falta_titulo_revista">Introduzca un titulo</string>
+
+    <!-- API key -->
+    <string name="TokenAPI">AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU</string>
+
+    <!-- mensajes de error -->
+    <string name="error_text">Introduzca el nombre del autor o el título</string>
+    <string name="error_falta_titulo_revista">Introduzca un título</string>
+    <string name="error_sin_conexion_busqueda">No se puede realizar la búsqeuda si no hay
+    conexión a Internet</string>
 </resources>
