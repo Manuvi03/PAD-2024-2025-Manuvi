@@ -19,6 +19,7 @@ public class BookInfo {
     private URL infoLink;
     private String description;
     private int pages;
+    private String thumbnail;
 
     public BookInfo(String title, List<String> authors, URL infoLink, String description, int pages) {
         this.title = title;
@@ -51,6 +52,10 @@ public class BookInfo {
         return pages;
     } //"volumeInfo"->"pageCount"
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -69,6 +74,10 @@ public class BookInfo {
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public void setThumbnail(String title) {
+        this.thumbnail = thumbnail;
     }
 
     static List<BookInfo> fromJsonResponse(String s) {
@@ -96,11 +105,11 @@ public class BookInfo {
 
                 JSONArray authorsArray = info.getJSONArray("authors");
                 List<String> authorsArrayList = new ArrayList<>();
-                if(authorsArray.length() != 0){
-                    for (int j = 0; j < authorsArray.length(); j++) {
-                        authorsArrayList.add(authorsArray.optString(j));
-                    }
+
+                for (int j = 0; j < authorsArray.length(); j++) {
+                    authorsArrayList.add(authorsArray.optString(j));
                 }
+
                 // Crear y agregar el objeto BookInfo
                 BookInfo bookInfo = new BookInfo(title, authorsArrayList, infoLink, description, pages);
                 bookList.add(bookInfo);

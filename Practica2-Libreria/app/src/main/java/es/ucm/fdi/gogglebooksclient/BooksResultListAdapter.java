@@ -35,15 +35,17 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflating our layout for item of recycler view item.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_rv_item, parent, false);
-        return new ViewHolder(view);
+        BookListElementBinding v = BookListElementBinding.inflate(LayoutInflater
+                .from(parent.getContext()), parent, false);
+
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        // inside on bind view holder method we are
-        // setting our data to each UI component.
+        // En nuestra bindViewHolder estamos
+        // configurando la información en nuestera UI.
         BookInfo bookInfo = mBooksData.get(position);
         holder.nameTV.setText(bookInfo.getTitle());
         holder.publisherTV.setText(bookInfo.getPublisher());
@@ -61,16 +63,12 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
                 // and passing all the data of that item in next intent.
                 Intent i = new Intent(mcontext, BookDetails.class);
                 i.putExtra("title", bookInfo.getTitle());
-                i.putExtra("subtitle", bookInfo.getSubtitle());
                 i.putExtra("authors", bookInfo.getAuthors());
-                i.putExtra("publisher", bookInfo.getPublisher());
-                i.putExtra("publishedDate", bookInfo.getPublishedDate());
                 i.putExtra("description", bookInfo.getDescription());
-                i.putExtra("pageCount", bookInfo.getPageCount());
+                i.putExtra("pageCount", bookInfo.getPages());
                 i.putExtra("thumbnail", bookInfo.getThumbnail());
-                i.putExtra("previewLink", bookInfo.getPreviewLink());
                 i.putExtra("infoLink", bookInfo.getInfoLink());
-                i.putExtra("buyLink", bookInfo.getBuyLink());
+
 
                 // after passing that data we are
                 // starting our new intent.
@@ -94,7 +92,7 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
             super(itemView.getRoot());
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) itemView.findViewById(R.id.vi);
+
         }
 
         public TextView getTextView() {
