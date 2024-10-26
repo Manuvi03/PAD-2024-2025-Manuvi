@@ -29,6 +29,7 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
     @Nullable
     @Override
+    // se cargan los datos de la API
     public List<BookInfo> loadInBackground() {
         try {
             return getBookInfoJson(queryString, printType);
@@ -38,13 +39,25 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     }
 
     @Override
+    // comprueba datos de caché
     public void onStartLoading(){
         forceLoad();
     }
 
     public List<BookInfo> getBookInfoJson(String queryString, String printType) throws IOException {
 
+        // primero se completa la URL de la conexión
+        URL url = completeURL(queryString, printType);
+
+        // y trás ello se realiza la conexión, en un hilo distinto, devolviendo el resultado obtenido
+        return connectToURL(url);
+    }
+
+    // completa correctamente la URL
+    private URL completeURL(String queryString, String printType) throws IOException{
         URL url;
+
+        // se completa correctamente la URL dependiendo de lo seleccionado por el usuario
         if(Objects.equals(printType, "Revista")){
             url = new URL(URL_BASE + queryString + "&printType=" + "magazines"+ "&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
         }
@@ -56,22 +69,46 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         }
         Log.i("URL", url.toString());
 
+        return url;
+    }
+
+
+
+
+
+
+    // ESTA FUNCIÓN HAY QUE REALIZARLA EN UN HILO DISTINTO, SEGÚN LAS DIAPOSITIVAS
+
+    // realiza la conexión URL
+    private List<BookInfo> connectToURL(URL url) throws IOException{
+
+        // resultado de la búsqueda tras la conexión
+        List<BookInfo> result;
+
+        // se obtiene, se configura y se conecta la URL
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setReadTimeout(10000 /* milliseconds */);
+        urlConnection.setConnectTimeout(15000 /* milliseconds */);
         urlConnection.setRequestMethod("GET");
+        urlConnection.setDoInput(true);
         urlConnection.connect();
 
-        // Lee todo el contenido del input stream y guárdalo en jsonResponse
-        BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
+        try {
+            // Lee el contenido del input stream y guárdalo en jsonResponse
+            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
 
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+
+            String jsonResponse = response.toString(); // Convertir el StringBuilder a String
+            result = BookInfo.fromJsonResponse(jsonResponse);
+        } finally {
+            // siempre se debe cerrar la conexión
+            urlConnection.disconnect();
         }
-
-        String jsonResponse = response.toString(); // Convertir el StringBuilder a String
-        List<BookInfo> result = BookInfo.fromJsonResponse(jsonResponse);
-        urlConnection.disconnect();
         return result;
     }
 }

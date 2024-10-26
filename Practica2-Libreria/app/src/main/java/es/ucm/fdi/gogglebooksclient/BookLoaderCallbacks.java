@@ -23,18 +23,21 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
 
     @NonNull
     @Override
+    // crea el Loader para el ID dado
     public Loader<List<BookInfo>> onCreateLoader(int id, @Nullable Bundle args) {
         assert args != null;
         return new BookLoader(context,args.getString(EXTRA_QUERY), args.getString(EXTRA_PRINT_TYPE));
     }
 
     @Override
+    // devuelve los datos cargados tras realizar la búsqueda
     public void onLoadFinished(@NonNull Loader<List<BookInfo>> loader, List<BookInfo> data) {
-
+        // a través del Context, se envía la información a la main activity
+        MainActivity ma = (MainActivity) context;
+        ma.updateBooksResult(data);
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<List<BookInfo>> loader) {
-
-    }
+    // vacío
+    public void onLoaderReset(@NonNull Loader<List<BookInfo>> loader) {}
 }

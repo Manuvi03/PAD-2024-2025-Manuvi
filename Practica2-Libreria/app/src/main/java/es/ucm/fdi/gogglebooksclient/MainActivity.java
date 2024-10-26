@@ -21,6 +21,8 @@ import androidx.loader.app.LoaderManager;
 
 import android.net.ConnectivityManager;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int BOOK_LOADER_ID = 1;
@@ -116,14 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void searchBooks(View view) {
-        Bundle queryBundle = new Bundle();
-        queryBundle.putString(BookLoaderCallbacks.EXTRA_QUERY, queryString);
-        queryBundle.putString(BookLoaderCallbacks.EXTRA_PRINT_TYPE, printType);
-        LoaderManager.getInstance(this).restartLoader(BOOK_LOADER_ID,
-                queryBundle, bookLoaderCallbacks);
-    }
-
     // se comprueba si hay conexion a Internet para poder realizar la busqueda
     private boolean isConnected() {
         Log.i(this.getClass().getName(), "Se comprueba la conexión a Internet antes de realizar la búsqueda.");
@@ -133,5 +127,19 @@ public class MainActivity extends AppCompatActivity {
         NetworkCapabilities networkCap =
                 connMgr.getNetworkCapabilities(network);
         return (networkCap != null);
+    }
+
+    // realiza la búsqueda en la API
+    public void searchBooks(View view) {
+        Bundle queryBundle = new Bundle();
+        queryBundle.putString(BookLoaderCallbacks.EXTRA_QUERY, queryString);
+        queryBundle.putString(BookLoaderCallbacks.EXTRA_PRINT_TYPE, printType);
+        LoaderManager.getInstance(this).restartLoader(BOOK_LOADER_ID,
+                queryBundle, bookLoaderCallbacks);
+    }
+
+    // actualiza los datos de la RecyclerView
+    public void updateBooksResult(List<BookInfo> books){
+
     }
 }
