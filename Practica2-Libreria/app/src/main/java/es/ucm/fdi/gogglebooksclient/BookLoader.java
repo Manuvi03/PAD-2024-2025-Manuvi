@@ -17,9 +17,15 @@ import java.util.Objects;
 
 public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
-    String queryString;
-    String printType;
-    String URL_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
+    // constantes referentes a la construcción de la URL
+    private final String URL_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
+    private final String PRINT_TYPE = "&printType=";
+    private final String KEY = "&key=";
+
+    // atributos
+    private String queryString;
+    private String printType;
+    private List<BookInfo> result = null;
 
     public BookLoader(@NonNull Context context,String queryString, String printType) {
         super(context);
@@ -32,7 +38,8 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     // se cargan los datos de la API
     public List<BookInfo> loadInBackground() {
         try {
-            return getBookInfoJson(queryString, printType);
+            getBookInfoJson(queryString, printType);
+            return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -44,13 +51,14 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         forceLoad();
     }
 
-    public List<BookInfo> getBookInfoJson(String queryString, String printType) throws IOException {
+    private void getBookInfoJson(String queryString, String printType) throws IOException {
 
         // primero se completa la URL de la conexión
         URL url = completeURL(queryString, printType);
 
-        // y trás ello se realiza la conexión, en un hilo distinto, devolviendo el resultado obtenido
-        return connectToURL(url);
+        // y trás ello se realiza la conexión, en un hilo independiente, obteniendo el resultado
+        ConnectionThread connectionThread = new ConnectionThread(url);
+        connectionThread.start();
     }
 
     // completa correctamente la URL
@@ -59,56 +67,68 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
 
         // se completa correctamente la URL dependiendo de lo seleccionado por el usuario
         if(Objects.equals(printType, "Revista")){
-            url = new URL(URL_BASE + queryString + "&printType=" + "magazines"+ "&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+            url = new URL(URL_BASE + queryString + PRINT_TYPE + "magazines"+ KEY + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
         }
         else if(Objects.equals(printType, "Libro")) {
-            url = new URL(URL_BASE + queryString + "&printType=" + "books"+ "&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+            url = new URL(URL_BASE + queryString + PRINT_TYPE + "books"+ KEY + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
         }
         else{
-            url = new URL(URL_BASE + queryString +"&key=" + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
+            url = new URL(URL_BASE + queryString + KEY + "AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU");
         }
         Log.i("URL", url.toString());
 
         return url;
     }
 
+    // hilo que realiza la conexión
+    class ConnectionThread extends Thread {
 
+        // URL
+        private URL url;
 
-
-
-
-    // ESTA FUNCIÓN HAY QUE REALIZARLA EN UN HILO DISTINTO, SEGÚN LAS DIAPOSITIVAS
-
-    // realiza la conexión URL
-    private List<BookInfo> connectToURL(URL url) throws IOException{
-
-        // resultado de la búsqueda tras la conexión
-        List<BookInfo> result;
-
-        // se obtiene, se configura y se conecta la URL
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setReadTimeout(10000 /* milliseconds */);
-        urlConnection.setConnectTimeout(15000 /* milliseconds */);
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setDoInput(true);
-        urlConnection.connect();
-
-        try {
-            // Lee el contenido del input stream y guárdalo en jsonResponse
-            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-
-            String jsonResponse = response.toString(); // Convertir el StringBuilder a String
-            result = BookInfo.fromJsonResponse(jsonResponse);
-        } finally {
-            // siempre se debe cerrar la conexión
-            urlConnection.disconnect();
+        // constructora
+        public ConnectionThread(URL url) {
+            this.url = url;
         }
-        return result;
+
+        // run, realiza la conexión
+        @Override
+        public void run() {
+            try {
+                Log.d("Connection Thread", "Thread ejecutando.");
+
+                // se obtiene, se configura y se conecta la conexión a la URL
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setReadTimeout(10000 /* milliseconds */);
+                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setDoInput(true);
+                urlConnection.connect();
+
+                Log.d("URL", "Conexión conectada");
+
+                try {
+                    // se lee el contenido del input stream y se guarda en jsonResponse
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+
+                    String jsonResponse = response.toString(); // convierte el StringBuilder a String
+                    result = BookInfo.fromJsonResponse(jsonResponse);
+                } finally {
+                    // siempre se debe cerrar la conexión
+                    urlConnection.disconnect();
+                    Log.d("URL", "Conexión desconectada");
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            Log.d("Connection Thread", "Thread ha terminado de ejecutar.");
+        }
     }
 }
