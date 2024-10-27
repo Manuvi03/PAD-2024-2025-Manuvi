@@ -23,8 +23,8 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     private final String KEY = "&key=";
 
     // atributos
-    private String queryString;
-    private String printType;
+    private final String queryString;
+    private final String printType;
     private List<BookInfo> result = null;
 
     public BookLoader(@NonNull Context context,String queryString, String printType) {
@@ -52,6 +52,45 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     }
 
     private void getBookInfoJson(String queryString, String printType) throws IOException {
+        URL url = completeURL(queryString, printType); // Completar la URL
+
+        // Obtener el resultado en un hilo en segundo plano
+        new Thread(() -> {
+            try {
+                // Lógica para establecer la conexión y obtener la información del JSON
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setReadTimeout(10000 /* milliseconds */);
+                urlConnection.setConnectTimeout(15000 /* milliseconds */);
+                //urlConnection.setRequestMethod("GET"); No son necesarias, ya están puestas de serie
+                //urlConnection.setDoInput(true);
+                urlConnection.connect(); // Establecer la conexión
+
+                Log.d("URL", String.valueOf(urlConnection.getResponseCode()));
+
+                try {
+                    // Leer el contenido del InputStream
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+
+                    String jsonResponse = response.toString(); // Convertir StringBuilder a String
+                    result = BookInfo.fromJsonResponse(jsonResponse);
+                } finally {
+                    urlConnection.disconnect(); // Desconectar la conexión
+                    Log.d("URL", "Conexión desconectada");
+                }
+            } catch (Exception e) {
+                // Manejar la excepción
+                e.printStackTrace(); // o cualquier otro manejo de excepciones
+            }
+        }).start(); // Iniciar el hilo
+    }
+    /*
+    private void getBookInfoJson(String queryString, String printType) throws IOException {
 
         // primero se completa la URL de la conexión
         URL url = completeURL(queryString, printType);
@@ -59,7 +98,8 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
         // y trás ello se realiza la conexión, en un hilo independiente, obteniendo el resultado
         ConnectionThread connectionThread = new ConnectionThread(url);
         connectionThread.start();
-    }
+        Log.i("Resultado", result.toString());
+    }*/
 
     // completa correctamente la URL
     private URL completeURL(String queryString, String printType) throws IOException{
@@ -84,11 +124,12 @@ public class BookLoader extends AsyncTaskLoader<List<BookInfo>> {
     class ConnectionThread extends Thread {
 
         // URL
-        private URL url;
+        private final URL url;
 
         // constructora
         public ConnectionThread(URL url) {
             this.url = url;
+            start();
         }
 
         // run, realiza la conexión

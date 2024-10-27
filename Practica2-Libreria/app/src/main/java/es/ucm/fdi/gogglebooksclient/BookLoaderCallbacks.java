@@ -2,6 +2,7 @@ package es.ucm.fdi.gogglebooksclient;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +34,15 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
     // devuelve los datos cargados tras realizar la búsqueda
     public void onLoadFinished(@NonNull Loader<List<BookInfo>> loader, List<BookInfo> data) {
         // a través del Context, se envía la información a la main activity
-        MainActivity ma = (MainActivity) context;
-        ma.updateBooksResult(data);
+        if (data != null) {
+            Log.i("JSON", data.toString());
+            MainActivity ma = (MainActivity) context;
+            ma.updateBooksResult(data);
+        } else {
+            Log.e("BookLoaderCallbacks", "Error: data is null in onLoadFinished");
+            MainActivity ma = (MainActivity) context;
+            ma.updateBooksResult(null); // or an empty list, depending on your MainActivity logic
+        }
     }
 
     @Override

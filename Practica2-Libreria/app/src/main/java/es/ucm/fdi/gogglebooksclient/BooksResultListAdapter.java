@@ -1,6 +1,8 @@
 package es.ucm.fdi.gogglebooksclient;
+
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,84 +14,74 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import es.ucm.fdi.gogglebooksclient.BookInfo;
-import es.ucm.fdi.gogglebooksclient.databinding.ActivityMainBinding;
-import es.ucm.fdi.gogglebooksclient.databinding.BookListElementBinding;
 
 public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultListAdapter.ViewHolder> {
 
-    // creating variables for arraylist and context.
-    private LinkedList<BookInfo> mBooksData;
+    private List<BookInfo> mBooksData;
+    private final LayoutInflater mInflater;
 
-    // creating constructor for array list and context.
-    public BooksResultListAdapter(LinkedList<BookInfo> bookInfoArrayList) {
+
+    public BooksResultListAdapter(List<BookInfo> bookInfoArrayList, Context context) {
+        this.mInflater = LayoutInflater.from(context);
         this.mBooksData = bookInfoArrayList;
+    }
+
+    public void setBooksData(List<BookInfo> books) {
+        this.mBooksData = books;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // inflating our layout for item of recycler view item.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_list_element
-                ,parent,false);
+        // Inflar el layout para cada elemento de la lista
+        View view = mInflater.inflate(R.layout.book_list_element, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        // En nuestra bindViewHolder estamos
-        // configurando la información en nuestera UI.
+        // Configuración de la UI para cada elemento
         BookInfo bookInfo = mBooksData.get(position);
-        holder.setData(bookInfo);
+        holder.title.setText(bookInfo.getTitle());
 
+        // Configuración de los autores
+        List<String> authors = bookInfo.getAuthors();
+        holder.author.setText(authors != null ? String.join(", ", authors) : "Autor desconocido");
+
+        // Configuración de las páginas
+        holder.pages.setText(String.valueOf(bookInfo.getPages()));
+
+        // Configuración de la imagen usando Picasso
+        Picasso.get().load(bookInfo.getThumbnail()).into(holder.bookImg);
+
+
+
+        // Listener para abrir el URL del libro en el navegador
+        holder.itemView.setOnClickListener(view -> {
+            Uri bookUri = Uri.parse(String.valueOf(bookInfo.getInfoLink()));
+            Intent intent = new Intent(Intent.ACTION_VIEW, bookUri);
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        // inside get item count method we
-        // are returning the size of our array list.
-        return mBooksData.size();
+        // Devuelve el tamaño de la lista de libros
+        return mBooksData != null ? mBooksData.size() : 0;
     }
 
-    public void setItems(LinkedList<BookInfo> items){mBooksData = items;}
-
+    // Clase interna ViewHolder para el RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView bookImg;
-        TextView title, author, url;
+        TextView title, author, pages;
 
-        //SE LLAMA ASI PORQUE EL BINDING SE GENERA A PARTIR DEL NOMBRE DEL LAYOUT EN ESTE CASO ACTIVITYMAIN
         public ViewHolder(View view) {
             super(view);
             bookImg = view.findViewById(R.id.bookImageView);
             title = view.findViewById(R.id.tituloTextView);
             author = view.findViewById(R.id.autoresTextView);
-            url = view.findViewById(R.id.paginasTextView);
-
-
+            pages = view.findViewById(R.id.paginasTextView);
         }
-
-        public void setData(final BookInfo book)
-        {
-            title.setText(book.getTitle());
-            author.setText("");
-            List<String> aut = book.getAuthors();
-            for(String autor: aut)
-            {
-                author.append(autor + " ");
-            }
-            url.setText(book.getInfoLink().toString()); // estoy hay que cambiarlo
-
-
-        }
-
     }
-
-
-
-
 }

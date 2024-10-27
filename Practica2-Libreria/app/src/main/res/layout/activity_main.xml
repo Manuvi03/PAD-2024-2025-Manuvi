@@ -47,11 +47,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:buttonTint="@color/brown"
             android:checked="true"
             android:text="@string/libro_string"
-            android:textColorHint="@color/brown"
-            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp" />
 
@@ -60,9 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:buttonTint="@color/brown"
             android:text="@string/revista_string"
-            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="278dp" />
 
@@ -71,11 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:buttonTint="@color/brown"
             android:text="@string/ambas_string"
-            android:textColorHighlight="@color/brown"
-            android:textColorHint="@color/brown"
-            android:textColorLink="@color/brown"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp" />
 
@@ -93,8 +84,9 @@
         app:srcCompat="@android:drawable/ic_menu_search" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="543dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
