@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import es.ucm.fdi.gogglebooksclient.BookInfo;
 import es.ucm.fdi.gogglebooksclient.databinding.ActivityMainBinding;
@@ -23,22 +24,19 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
 
     // creating variables for arraylist and context.
     private LinkedList<BookInfo> mBooksData;
-    private Context mcontext;
 
     // creating constructor for array list and context.
-    public BooksResultListAdapter(LinkedList<BookInfo> bookInfoArrayList, Context mcontext) {
+    public BooksResultListAdapter(LinkedList<BookInfo> bookInfoArrayList) {
         this.mBooksData = bookInfoArrayList;
-        this.mcontext = mcontext;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflating our layout for item of recycler view item.
-        BookListElementBinding v = BookListElementBinding.inflate(LayoutInflater
-                .from(parent.getContext()), parent, false);
-
-        return new ViewHolder(v);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_list_element
+                ,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -47,34 +45,8 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
         // En nuestra bindViewHolder estamos
         // configurando la información en nuestera UI.
         BookInfo bookInfo = mBooksData.get(position);
-        holder.nameTV.setText(bookInfo.getTitle());
-        holder.publisherTV.setText(bookInfo.getPublisher());
-        holder.pageCountTV.setText("No of Pages : " + bookInfo.getPageCount());
-        holder.dateTV.setText(bookInfo.getPublishedDate());
+        holder.setData(bookInfo);
 
-        // below line is use to set image from URL in our image view.
-        Picasso.get().load(bookInfo.getThumbnail()).into(holder.bookIV);
-
-        // below line is use to add on click listener for our item of recycler view.
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // inside on click listener method we are calling a new activity
-                // and passing all the data of that item in next intent.
-                Intent i = new Intent(mcontext, BookDetails.class);
-                i.putExtra("title", bookInfo.getTitle());
-                i.putExtra("authors", bookInfo.getAuthors());
-                i.putExtra("description", bookInfo.getDescription());
-                i.putExtra("pageCount", bookInfo.getPages());
-                i.putExtra("thumbnail", bookInfo.getThumbnail());
-                i.putExtra("infoLink", bookInfo.getInfoLink());
-
-
-                // after passing that data we are
-                // starting our new intent.
-                mcontext.startActivity(i);
-            }
-        });
     }
 
     @Override
@@ -84,21 +56,40 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
         return mBooksData.size();
     }
 
+    public void setItems(LinkedList<BookInfo> items){mBooksData = items;}
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        ImageView bookImg;
+        TextView title, author, url;
 
         //SE LLAMA ASI PORQUE EL BINDING SE GENERA A PARTIR DEL NOMBRE DEL LAYOUT EN ESTE CASO ACTIVITYMAIN
-        public ViewHolder(BookListElementBinding itemView) {
-            super(itemView.getRoot());
-            // Define click listener for the ViewHolder's View
+        public ViewHolder(View view) {
+            super(view);
+            bookImg = view.findViewById(R.id.bookImageView);
+            title = view.findViewById(R.id.tituloTextView);
+            author = view.findViewById(R.id.autoresTextView);
+            url = view.findViewById(R.id.paginasTextView);
 
 
         }
 
-        public TextView getTextView() {
-            return textView;
+        public void setData(final BookInfo book)
+        {
+            title.setText(book.getTitle());
+            author.setText("");
+            List<String> aut = book.getAuthors();
+            for(String autor: aut)
+            {
+                author.append(autor + " ");
+            }
+            url.setText(book.getInfoLink().toString()); // estoy hay que cambiarlo
+
+
         }
+
     }
+
+
 
 
 }
