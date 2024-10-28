@@ -10,6 +10,9 @@
     <string name="revista_string">Revista</string>
     <string name="ambas_string">Ambas</string>
     <string name="buscar_string">Buscar</string>
+    <string name="resultado_string">Resultados</string>
+    <string name = "cargando_string">Cargando...</string>
+    <string name = "nullResultado_string">No se han encontrado resultados</string>
 
     <!-- API key -->
     <string name="TokenAPI">AIzaSyCgcmZj01An4CkRZicIA2EzQrk-bGTL9qU</string>

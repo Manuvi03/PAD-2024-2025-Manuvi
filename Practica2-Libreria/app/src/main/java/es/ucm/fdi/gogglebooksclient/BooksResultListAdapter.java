@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,12 +54,17 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
         holder.pages.setText(String.valueOf(bookInfo.getPages()));
 
         // Configuración de la imagen usando Picasso
-        Picasso.get().load(bookInfo.getThumbnail()).into(holder.bookImg);
+        // utiliza un placeholder para cuando no hay imagen o hay un error
+        String s = bookInfo.getThumbnail();
+
+        Picasso.get().load(s).placeholder(R.drawable.placeholder_book).
+                error(R.drawable.placeholder_book).into(holder.bookImg);
 
 
 
         // Listener para abrir el URL del libro en el navegador
         holder.itemView.setOnClickListener(view -> {
+            Log.i("BookLink",String.valueOf(bookInfo.getInfoLink()));
             Uri bookUri = Uri.parse(String.valueOf(bookInfo.getInfoLink()));
             Intent intent = new Intent(Intent.ACTION_VIEW, bookUri);
             view.getContext().startActivity(intent);

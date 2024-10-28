@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.squareup.picasso:picasso:2.71828") // libreria para mostrar la imagen del libro si tiene
+    implementation("com.squareup.picasso:picasso:2.8") // libreria para mostrar la imagen del libro si tiene
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

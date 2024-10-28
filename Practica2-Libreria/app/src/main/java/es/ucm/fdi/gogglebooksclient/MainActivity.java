@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private String printType;
     private EditText editTextTitulo;
     private EditText editTextAutor;
+    private TextView resultText;
     private RadioButton selectedButton;
     private BooksResultListAdapter booksResultListAdapter;
 
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 editTextAutor.setEnabled(true);
             }
         });
-
+        resultText = findViewById(R.id.resultView);
         editTextTitulo = findViewById(R.id.editTextTitulo);
         editTextAutor = findViewById(R.id.editTextAutor);
         //listener del boton de busqueda que al realizar el click al boton se llama al metodo searchbooks
@@ -175,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle queryBundle = new Bundle();
         queryBundle.putString(BookLoaderCallbacks.EXTRA_QUERY, queryString);
         queryBundle.putString(BookLoaderCallbacks.EXTRA_PRINT_TYPE, printType);
+        resultText.setText(R.string.cargando_string);
         LoaderManager.getInstance(this).restartLoader(BOOK_LOADER_ID,
                 queryBundle, bookLoaderCallbacks);
     }
@@ -183,6 +186,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     public void updateBooksResult(List<BookInfo> books) {
         booksResultListAdapter.setBooksData(books);  // Actualiza la lista de datos en el adaptador
+        if (books == null) {
+            resultText.setText(R.string.nullResultado_string);
+        } else {
+            resultText.setText(R.string.resultado_string);
+        }
         booksResultListAdapter.notifyDataSetChanged();  // Notifica a RecyclerView que los datos han cambiado
     }
 }

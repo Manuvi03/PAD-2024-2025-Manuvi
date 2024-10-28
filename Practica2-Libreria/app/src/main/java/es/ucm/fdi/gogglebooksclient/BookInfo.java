@@ -85,7 +85,7 @@ public class BookInfo {
                 String thumbnail = null;
                 JSONObject imageLinks = info.optJSONObject("imageLinks");
                 if (imageLinks != null) {
-                    thumbnail = imageLinks.optString("smallThumbnail");
+                    thumbnail = imageLinks.optString("thumbnail");
                 }
 
                 int pages = info.optInt("pageCount");
