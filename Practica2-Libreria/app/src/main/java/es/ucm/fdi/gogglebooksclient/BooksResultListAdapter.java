@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -56,11 +57,20 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
         // Configuración de la imagen usando Picasso
         // utiliza un placeholder para cuando no hay imagen o hay un error
         String s = bookInfo.getThumbnail();
+        Picasso.get().load(s)
+                .placeholder(R.drawable.placeholder_book)
+                .error(R.drawable.menu_book)
+                        .into(holder.bookImg, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("Picasso", "Imagen cargada con exito");
+                            }
 
-        Picasso.get().load(s).placeholder(R.drawable.placeholder_book).
-                error(R.drawable.placeholder_book).into(holder.bookImg);
-
-
+                            @Override
+                            public void onError(Exception e) {
+                                Log.e("Picasso", "Fallo al cargar la imagen: " + e.getMessage());
+                            }
+                        });
 
         // Listener para abrir el URL del libro en el navegador
         holder.itemView.setOnClickListener(view -> {
