@@ -91,7 +91,7 @@ public class BookInfo {
                 int pages = info.optInt("pageCount");
 
                 URL infoLink = null;
-                String sLink = info.optString("infoLink");
+                String sLink = info.optString("previewLink");
                 if (!sLink.isEmpty()) {
                     try {
                         infoLink = new URL(sLink);
