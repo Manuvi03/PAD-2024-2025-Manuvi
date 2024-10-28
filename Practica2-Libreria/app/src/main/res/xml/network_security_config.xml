@@ -5,5 +5,6 @@
             <certificates src="system" />
         </trust-anchors>
     </base-config>
-    <!-- Configuracion sacada de StackOverFlow: https://stackoverflow.com/questions/58430498/error-http-504-when-load-image-form-url-with-picasso-android-library -->
+    <!-- Configuracion sacada de StackOverFlow:
+    https://stackoverflow.com/questions/58430498/error-http-504-when-load-image-form-url-with-picasso-android-library -->
 </network-security-config>
