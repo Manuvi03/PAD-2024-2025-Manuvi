@@ -1,4 +1,4 @@
-<!-- Configuracion sacada de StackOverFlow: https://stackoverflow.com/questions/58430498/error-http-504-when-load-image-form-url-with-picasso-android-library-->
+<!-- Configuracion sacada de StackOverFlow: https://stackoverflow.com/questions/58430498/error-http-504-when-load-image-form-url-with-picasso-android-library -->
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <base-config cleartextTrafficPermitted="true">
