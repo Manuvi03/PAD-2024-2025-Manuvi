@@ -41,7 +41,7 @@ public class BookLoaderCallbacks implements LoaderManager.LoaderCallbacks<List<B
         } else {
             Log.e("BookLoaderCallbacks", "Error: data is null in onLoadFinished");
             MainActivity ma = (MainActivity) context;
-            ma.updateBooksResult(null); // or an empty list, depending on your MainActivity logic
+            ma.updateBooksResult(null);
         }
     }
 

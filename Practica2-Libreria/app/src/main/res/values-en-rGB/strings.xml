@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="libro_string">Book</string>
+    <string name="titulo_string">Title</string>
+    <string name="autor_string">Author</string>
+    <string name="revista_string">Magazine</string>
+    <string name="ambas_string">Both</string>
+    <string name="buscar_string">Search</string>
+    <string name="resultado_string">Results</string>
+    <string name="cargando_string">Loading...</string>
+    <string name="nullResultado_string">No results found</string>
+    <string name="error_text">Enter author or book name</string>
+    <string name="error_falta_titulo_revista">Enter a title</string>
+    <string name="error_sin_conexion_busqueda">Cannot search if there is no Internet connection</string>
+</resources>
