@@ -3,7 +3,21 @@
     <style name="Base.Theme.GoggleBooksClient" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/light_orange</item>
+        <item name="colorPrimaryDark">@color/brown</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
     <style name="Theme.GoggleBooksClient" parent="Base.Theme.GoggleBooksClient" />
+
+    <style name="Theme.GoggleBooksClient.RadioButtonTheme">
+        <item name ="android:layout_width">0dp</item>
+        <item name ="android:layout_height">match_parent</item>
+        <item name ="android:layout_marginStart">16dp</item>
+        <item name ="android:layout_marginEnd">16dp</item>
+        <item name ="android:layout_weight">1</item>
+        <item name ="android:checked">true</item>
+        <item name ="android:textSize">18sp</item>
+    </style>
+
 </resources>
