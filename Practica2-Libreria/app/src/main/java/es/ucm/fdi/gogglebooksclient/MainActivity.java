@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     // Comprobamos que los campos no estén vacíos
                     Log.i(this.getClass().getName(), "Entro a libros");
                     if (editTextTitulo.getText().toString().isEmpty() && editTextAutor.getText().toString().isEmpty()) {
-                        Log.i(this.getClass().getName(), "Falta de argumentos");
+                        Log.w(this.getClass().getName(), "Falta de argumentos");
                         Toast.makeText(MainActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                         return;
                     }
