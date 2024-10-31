@@ -70,7 +70,7 @@ public class BookInfo {
 
     static List<BookInfo> fromJsonResponse(String s) {
         List<BookInfo> bookList = new ArrayList<>();
-        List<String> authorsArrayList = new ArrayList<>(); // Reuse this list
+        List<String> authorsArrayList = new ArrayList<>();
 
         try {
             JSONObject json = new JSONObject(s);
@@ -101,7 +101,7 @@ public class BookInfo {
                 }
 
                 JSONArray authorsArray = info.optJSONArray("authors");
-                authorsArrayList.clear(); // Clear the list for reuse
+                authorsArrayList.clear(); // Elimino el contenido para volver a usar el array
                 if (authorsArray != null) {
                     for (int j = 0; j < authorsArray.length(); j++) {
                         authorsArrayList.add(authorsArray.optString(j));
@@ -116,53 +116,7 @@ public class BookInfo {
 
         } catch (JSONException e) {
             Log.e("BookInfo", "Error parsing JSON: " + e.getMessage());
-            return null; // or an empty list
-        }
-    }
-
-    /*
-    static List<BookInfo> fromJsonResponse(String s) {
-        List<BookInfo> bookList = new ArrayList<>();
-        try {
-            JSONObject json = new JSONObject(s);
-            JSONArray jsonBooks = json.getJSONArray("items");
-            Log.i("JSON", jsonBooks.toString());
-
-            for (int i = 0; i < jsonBooks.length(); i++) {
-                JSONObject book = jsonBooks.getJSONObject(i);
-                JSONObject info = book.getJSONObject("volumeInfo");
-
-                // Obtener el título (esto es obligatorio
-                String title = info.optString("title");
-                JSONObject imageLinks = info.optJSONObject("imageLinks");
-                assert imageLinks != null;
-                String thumbnail = imageLinks.optString("smallThumbnail");
-                int pages = info.optInt("pageCount");
-                String sLink = info.optString("infoLink");
-                URL infoLink;
-                if (!sLink.isEmpty()) {
-                    infoLink = new URL(sLink);
-                } else {
-                    infoLink = null;
-                }
-
-                JSONArray authorsArray = info.getJSONArray("authors");
-                List<String> authorsArrayList = new ArrayList<>();
-
-                for (int j = 0; j < authorsArray.length(); j++) {
-                    authorsArrayList.add(authorsArray.optString(j));
-                }
-
-                // Crear y agregar el objeto BookInfo
-                BookInfo bookInfo = new BookInfo(title, authorsArrayList, infoLink, pages, thumbnail);
-                bookList.add(bookInfo);
-
-            }
-            Log.i("JSON", bookList.toString());
-            return bookList;
-        } catch (MalformedURLException | JSONException e) {
-            Log.i("JSON", "Error al parsear el JSON");
             return null;
         }
-    }*/
+    }
 }

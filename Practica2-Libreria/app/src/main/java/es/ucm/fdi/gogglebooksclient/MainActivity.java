@@ -25,9 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.ConnectivityManager;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         resultText = findViewById(R.id.resultView);
         editTextTitulo = findViewById(R.id.editTextTitulo);
         editTextAutor = findViewById(R.id.editTextAutor);
-        //listener del boton de busqueda que al realizar el click al boton se llama al metodo searchbooks
         // Listener del botón de búsqueda que, al hacer clic, llama al método searchBooks
         ImageButton busqueda = findViewById(R.id.imageButton);
 
@@ -91,31 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         booksResultListAdapter = new BooksResultListAdapter(Collections.emptyList(), this);
         recyclerView.setAdapter(booksResultListAdapter);
-
-
-        /*try {
-            List<BookInfo> bookList = Arrays.asList(
-                    new BookInfo("To Kill a Mockingbird", Collections.singletonList("Harper Lee"), new URL("https://example.com/tokillamockingbird"), 324, "http://books.google.com/books/content?id=3r89AAAAYAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"),
-                    new BookInfo("1984", Collections.singletonList("George Orwell"), new URL("https://example.com/1984"), 328, "https://example.com/images/1984.jpg"),
-                    new BookInfo("The Great Gatsby", Collections.singletonList("F. Scott Fitzgerald"), new URL("https://example.com/thegreatgatsby"), 180, "https://example.com/images/thegreatgatsby.jpg"),
-                    new BookInfo("One Hundred Years of Solitude", Collections.singletonList("Gabriel Garcia Marquez"), new URL("https://example.com/onehundredyearsofsolitude"), 417, "https://example.com/images/onehundredyearsofsolitude.jpg"),
-                    new BookInfo("Pride and Prejudice", Collections.singletonList("Jane Austen"), new URL("https://example.com/prideandprejudice"), 279, "https://example.com/images/prideandprejudice.jpg"),
-                    new BookInfo("The Catcher in the Rye", Collections.singletonList("J.D. Salinger"), new URL("https://example.com/thecatcherintherye"), 214, "https://example.com/images/thecatcherintherye.jpg"),
-                    new BookInfo("The Hobbit", Collections.singletonList("J.R.R. Tolkien"), new URL("https://example.com/thehobbit"), 310, "https://example.com/images/thehobbit.jpg"),
-                    new BookInfo("Fahrenheit 451", Collections.singletonList("Ray Bradbury"), new URL("https://example.com/fahrenheit451"), 158, "https://example.com/images/fahrenheit451.jpg"),
-                    new BookInfo("The Alchemist", Collections.singletonList("Paulo Coelho"), new URL("https://example.com/thealchemist"), 208, "https://example.com/images/thealchemist.jpg"),
-                    new BookInfo("Moby-Dick", Collections.singletonList("Herman Melville"), new URL("https://example.com/mobydick"), 635, "https://example.com/images/mobydick.jpg"),
-                    new BookInfo("Brave New World", Collections.singletonList("Aldous Huxley"), new URL("https://example.com/bravenewworld"), 311, "https://example.com/images/bravenewworld.jpg"),
-                    new BookInfo("The Odyssey", Collections.singletonList("Homer"), new URL("https://example.com/theodyssey"), 374, "https://example.com/images/theodyssey.jpg"),
-                    new BookInfo("War and Peace", Collections.singletonList("Leo Tolstoy"), new URL("https://example.com/warandpeace"), 1225, "https://example.com/images/warandpeace.jpg"),
-                    new BookInfo("The Divine Comedy", Collections.singletonList("Dante Alighieri"), new URL("https://example.com/thedivinecomedy"), 798, "https://example.com/images/thedivinecomedy.jpg"),
-                    new BookInfo("Crime and Punishment", Collections.singletonList("Fyodor Dostoevsky"), new URL("https://example.com/crimeandpunishment"), 671, "https://example.com/images/crimeandpunishment.jpg")
-            );
-            updateBooksResult(bookList);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-*/
+        
 
         busqueda.setOnClickListener(v -> {
             // la búsqueda se reaiza solo si hay conexión a Internet
@@ -134,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     // Comprobamos que los campos no estén vacíos
                     Log.i(this.getClass().getName(), "Entro a libros");
                     if (editTextTitulo.getText().toString().isEmpty() && editTextAutor.getText().toString().isEmpty()) {
-                        Log.i(this.getClass().getName(), "Entro a libros");
+                        Log.i(this.getClass().getName(), "Falta de argumentos");
                         Toast.makeText(MainActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                         return;
                     }

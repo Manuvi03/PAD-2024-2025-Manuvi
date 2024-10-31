@@ -1,3 +1,4 @@
+import java.util.Properties
 
 
 plugins {
@@ -18,8 +19,18 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        android.buildFeatures.buildConfig = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        //carga los valores del archivo .properties
+        val keystoreFile = project.rootProject.file("apikeys.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+
+        //devuelve una clave vacía en caso de que algo salga mal
+        val apiKey = properties.getProperty("API_KEY") ?: ""
+
+        buildConfigField("String", "BOOKS_API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
