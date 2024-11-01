@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "es.ucm.fdi.gogglebooksclient"
+    namespace = "es.ucm.fdi.googlebooksclient"
     compileSdk = 34
 
     viewBinding {
@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "es.ucm.fdi.gogglebooksclient"
+        applicationId = "es.ucm.fdi.googlebooksclient"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

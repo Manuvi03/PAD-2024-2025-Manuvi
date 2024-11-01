@@ -47,21 +47,21 @@
             android:text="@string/libro_string"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp"
-            style="@style/Theme.GoggleBooksClient.RadioButtonTheme"/>
+            style="@style/Theme.GoogleBooksClient.RadioButtonTheme"/>
 
         <RadioButton
             android:id="@+id/radioButtonRevista"
             android:text="@string/revista_string"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="278dp"
-            style="@style/Theme.GoggleBooksClient.RadioButtonTheme"/>
+            style="@style/Theme.GoogleBooksClient.RadioButtonTheme"/>
 
         <RadioButton
             android:id="@+id/radioButtonAmbas"
             android:text="@string/ambas_string"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="230dp"
-            style="@style/Theme.GoggleBooksClient.RadioButtonTheme"/>
+            style="@style/Theme.GoogleBooksClient.RadioButtonTheme"/>
 
     </RadioGroup>
 

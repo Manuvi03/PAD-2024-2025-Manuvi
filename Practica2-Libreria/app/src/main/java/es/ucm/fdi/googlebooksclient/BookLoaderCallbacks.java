@@ -1,4 +1,4 @@
-package es.ucm.fdi.gogglebooksclient;
+package es.ucm.fdi.googlebooksclient;
 
 import android.content.Context;
 import android.os.Bundle;

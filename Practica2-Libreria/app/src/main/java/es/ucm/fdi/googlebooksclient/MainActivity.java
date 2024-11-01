@@ -1,4 +1,4 @@
-package es.ucm.fdi.gogglebooksclient;
+package es.ucm.fdi.googlebooksclient;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

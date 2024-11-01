@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.GoggleBooksClient" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.GoogleBooksClient" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/light_orange</item>
@@ -8,9 +8,9 @@
         <item name="colorAccent">@color/black</item>
     </style>
 
-    <style name="Theme.GoggleBooksClient" parent="Base.Theme.GoggleBooksClient" />
+    <style name="Theme.GoogleBooksClient" parent="Base.Theme.GoogleBooksClient" />
 
-    <style name="Theme.GoggleBooksClient.RadioButtonTheme">
+    <style name="Theme.GoogleBooksClient.RadioButtonTheme">
         <item name ="android:layout_width">0dp</item>
         <item name ="android:layout_height">match_parent</item>
         <item name ="android:layout_marginStart">16dp</item>
