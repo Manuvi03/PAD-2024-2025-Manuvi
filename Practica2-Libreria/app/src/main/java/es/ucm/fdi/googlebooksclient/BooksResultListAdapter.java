@@ -51,8 +51,9 @@ public class BooksResultListAdapter extends RecyclerView.Adapter<BooksResultList
         List<String> authors = bookInfo.getAuthors();
         holder.author.setText(authors != null ? String.join(", ", authors) : "Autor desconocido");
 
-        // Configuración de las páginas
-        holder.pages.setText(String.valueOf(bookInfo.getPages()));
+        String numPagesString = holder.itemView.getContext().getString(R.string.numero_paginas_string);
+        String pages = numPagesString + " "+ bookInfo.getPages();
+        holder.pages.setText(pages);
 
         // Configuración de la imagen usando Picasso
         // utiliza un placeholder para cuando no hay imagen o hay un error

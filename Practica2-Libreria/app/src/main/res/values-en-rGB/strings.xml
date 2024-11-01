@@ -7,7 +7,8 @@
     <string name="ambas_string">Both</string>
     <string name="buscar_string">Search</string>
     <string name="resultado_string">Results</string>
-    <string name="cargando_string">Loading...</string>
+    <string name="cargando_string">Loading…</string>
+    <string name="numero_paginas_string">Pages:</string>
     <string name="nullResultado_string">No results found</string>
     <string name="error_text">Enter author or book name</string>
     <string name="error_falta_titulo_revista">Enter a title</string>
