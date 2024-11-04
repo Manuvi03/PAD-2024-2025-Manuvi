@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Modificamos la queryString dependiendo del botón seleccionado
                 if (selectedButton == findViewById(R.id.radioButtonRevista)) {//Revista
-                    if (editTextTitulo.getText().toString().isEmpty()) {
+                    if (editTextTitulo.getText().toString().isBlank()) {
                         Toast.makeText(MainActivity.this, R.string.error_falta_titulo_revista, Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -106,15 +106,15 @@ public class MainActivity extends AppCompatActivity {
                 } else { //Libro o ambas
                     // Comprobamos que los campos no estén vacíos
                     Log.i(this.getClass().getName(), "Entro a libros");
-                    if (editTextTitulo.getText().toString().isEmpty() && editTextAutor.getText().toString().isEmpty()) {
+                    if (editTextTitulo.getText().toString().isBlank() && editTextAutor.getText().toString().isBlank()) {
                         Log.w(this.getClass().getName(), "Falta de argumentos");
                         Toast.makeText(MainActivity.this, R.string.error_text, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (!editTextTitulo.getText().toString().isEmpty()) {
+                    if (!editTextTitulo.getText().toString().isBlank()) {
                         queryString = "intitle:" + editTextTitulo.getText().toString();
                     }
-                    if (!editTextAutor.getText().toString().isEmpty()) {
+                    if (!editTextAutor.getText().toString().isBlank()) {
                         if (!queryString.isEmpty()) {
                             queryString += "+inauthor:" + editTextAutor.getText().toString();
                         } else {
