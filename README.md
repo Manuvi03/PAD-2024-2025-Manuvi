@@ -24,6 +24,10 @@ Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea 🌸�
 9. [Notificaciones](/Contenidos_Teoricos/Android/09.Notificaciones.pdf)
 10. [Alarmas](/Contenidos_Teoricos/Android/10_Alarmas.pdf)
 11. [Programar Tareas (JobScheduler)](/Contenidos_Teoricos/Android/11_ProgramarTareas_JobScheduler.pdf)
+12. [Apmacenamiento Persistente](/Contenidos_Teoricos/Android/12_Storage.pdf)
+
+#### [Tecnologías Web]
+1. [Desarrollo de Aplicaciones con Tecnologías Web 1](/Contenidos_Teoricos/Tecnologías%20Web/01_AppsTecnologiasWeb.pdf)
 
 ---
 
