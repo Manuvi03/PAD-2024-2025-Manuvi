@@ -27,8 +27,11 @@ Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea 🌸�
 12. [Almacenamiento Persistente](/Contenidos_Teoricos/Android/12_Storage.pdf)
 
 #### [Tecnologías Web]
-1. [Desarrollo de Aplicaciones con Tecnologías Web 1](/Contenidos_Teoricos/Tecnologías%20Web/01_AppsTecnologiasWeb.pdf)
-
+1. [Desarrollo de Aplicaciones con Tecnologías Web 1(HTML, CSS)](/Contenidos_Teoricos/Tecnologías%20Web/01_AppsTecnologiasWeb.pdf)
+2. [Desarrollo de Apps con Tecnologías Web 2 (JS)](/Contenidos_Teoricos/Tecnologías%20Web/02_AppsTecnologiasWeb_JS.pdf)
+3. [Publicación de páginas web con GitHub Pages](/Contenidos_Teoricos/Tecnologías%20Web/03_PublicarProyectoWeb.pdf)
+4. [Aplicaciones Web Progresivas](/Contenidos_Teoricos/Tecnologías%20Web/04_PWA.pdf)
+5. [Interfaces de usuario avanzadas](/Contenidos_Teoricos/Tecnologías%20Web/05_AdvancedWebUI.pdf)
 ---
 
 ### 🚀 Prácticas
