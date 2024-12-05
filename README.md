@@ -37,4 +37,4 @@ Repositorio de uso privado para el grupo 2 del año 2024/2025 - **Azalea 🌸�
 ### 🚀 Prácticas
 1. [Práctica 1: Calculadora](Practica1-Calculadora)
 2. [Práctica 2: Libreria](Practica2-Libreria)
-3. [Práctica 3: Por definir] 
+3. [Práctica 3: Librería PWA](Practica3-LibreriaReact/libreria-pwa) 
