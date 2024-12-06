@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffe2b8);
+    background: linear-gradient(135deg, #ffafbd, #ffc3a0, #b67e2f);
     color: #333;
     margin: 0;
     padding: 0;
@@ -36,7 +36,7 @@ body {
   /* Encabezado */
   h1 {
     text-align: center;
-    color: #ff6f61;
+    color: #333333;
     font-size: 2.8em;
     margin-bottom: 20px;
     text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
@@ -100,7 +100,7 @@ body {
     margin-left: 10px;
     padding: 12px 25px;
     border: none;
-    background: #ff6f61;
+    background: #333333;
     color: white;
     border-radius: 30px;
     cursor: pointer;
