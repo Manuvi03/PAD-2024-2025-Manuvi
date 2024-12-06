@@ -10,10 +10,14 @@ const Home = () => {
   const [genreFilter, setGenreFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [recentBooks, setRecentBooks] = useState([]);
+  const [categorizedBooks, setCategorizedBooks] = useState([]);
 
   useEffect(() => {
     const storedRecentBooks = JSON.parse(localStorage.getItem('recentBooks')) || [];
     setRecentBooks(storedRecentBooks);
+
+    const storedCategorizedBooks = JSON.parse(localStorage.getItem('categorizedBooks')) || [];
+    setCategorizedBooks(storedCategorizedBooks);
   }, []);
 
   useEffect(() => {
@@ -22,14 +26,13 @@ const Home = () => {
       getBooks(titleQuery, genreFilter).then(data => {
         setBooks(data);
         setLoading(false);
-
-        // Almacenar los últimos 5 libros consultados
-        const newRecentBooks = [...data.slice(0, 5), ...recentBooks.slice(0, 4)];
-        localStorage.setItem('recentBooks', JSON.stringify(newRecentBooks));
-        setRecentBooks(newRecentBooks);
       });
     }
   }, [titleQuery, genreFilter]);
+
+  useEffect(() => {
+    localStorage.setItem('recentBooks', JSON.stringify(recentBooks));
+  }, [recentBooks]);
 
   const handleSearch = (query) => {
     setTitleQuery(query);
@@ -39,14 +42,30 @@ const Home = () => {
     setGenreFilter(genre);
   };
 
+  const handleCategorize = (book) => {
+    const newCategorizedBooks = [book, ...categorizedBooks.filter(b => b.id !== book.id)];
+    localStorage.setItem('categorizedBooks', JSON.stringify(newCategorizedBooks));
+    setCategorizedBooks(newCategorizedBooks);
+  };
+
+  const handleBookClick = (book) => {
+    const newRecentBooks = [book, ...recentBooks.filter(b => b.id !== book.id)];
+    if (newRecentBooks.length > 5) {
+      newRecentBooks.pop(); // Descarta el libro más antiguo si ya hay 5 libros
+    }
+    setRecentBooks(newRecentBooks);
+  };
+
   return (
     <div>
       <h1>Buscador de Libros</h1>
       <SearchBar onSearch={handleSearch} />
       <FilterBar onFilter={handleFilter} />
-      {loading ? <p>Cargando...</p> : <BookList books={books} />}
+      {loading ? <p>Cargando...</p> : <BookList books={books} onCategorize={handleCategorize} onBookClick={handleBookClick} />}
       <h2>Últimos 5 Libros Consultados</h2>
       <BookList books={recentBooks} />
+      <h2>Libros Categorizados</h2>
+      <BookList books={categorizedBooks} />
     </div>
   );
 };

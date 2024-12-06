@@ -8,10 +8,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Cambiado de center a flex-start */
+    justify-content: flex-start;
     min-height: 100vh;
     transition: background 0.5s ease;
-    overflow-y: auto; /* Permitir desplazamiento vertical */
+    overflow-y: auto;
   }
   
   /* Contenedor principal */
@@ -24,8 +24,8 @@ body {
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 100vh; /* Asegurar un alto mínimo */
-    overflow-y: auto; /* Permitir desplazamiento vertical */
+    min-height: 100vh;
+    overflow-y: auto;
   }
   
   .container:hover {
