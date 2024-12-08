@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyBlZTkj07d-2LykWq_3GgRW3l_dKHHBCS4'; // Reemplaza con tu clave de API
-const BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
+const API_KEY = "AIzaSyBlZTkj07d-2LykWq_3GgRW3l_dKHHBCS4"; // Clave de la API de Google Books
+const BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 
 export const getBooks = async (title, genre) => {
   try {
@@ -11,10 +11,13 @@ export const getBooks = async (title, genre) => {
       url += `+subject:${encodeURIComponent(genre)}`;
     }
 
+    // Añado un console.log para mostrar la URL
+    console.log('URL:', url);
+
     const response = await axios.get(url, {
       params: {
         key: API_KEY,
-        maxResults: 40,
+        maxResults: 20,
       },
     });
 

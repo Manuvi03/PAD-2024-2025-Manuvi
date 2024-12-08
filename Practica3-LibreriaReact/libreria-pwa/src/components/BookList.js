@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import defaultCover from '../assets/default-cover.png'; // Importa la imagen predeterminada
 
-const BookList = ({ books }) => {
-  const handleBookClick = (link) => {
-    window.open(link, '_blank'); // Abre el enlace en una nueva pestaña
+const BookList = ({ books, onBookClick }) => {
+  const handleBookClick = (book) => {
+    if (onBookClick) {
+      onBookClick(book);
+    }
+    window.open(book.link, '_blank'); // Abre el enlace en una nueva pestaña
   };
 
   return (
@@ -18,9 +22,13 @@ const BookList = ({ books }) => {
           key={book.id}
           className="book-item"
           whileHover={{ scale: 1.05 }}
-          onClick={() => handleBookClick(book.link)} // Manejador de clic
+          onClick={() => handleBookClick(book)} // Manejador de clic
         >
-          {book.imageUrl && <img src={book.imageUrl} alt={book.title} className="book-image" />}
+          <img
+            src={book.imageUrl || defaultCover} // Usa la imagen predeterminada si no hay portada
+            alt={book.title}
+            className="book-image"
+          />
           <div className="book-details">
             <h3>{book.title}</h3>
             <p>Autor: {book.author}</p>

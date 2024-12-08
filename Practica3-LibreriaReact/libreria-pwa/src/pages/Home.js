@@ -9,16 +9,18 @@ const Home = () => {
   const [titleQuery, setTitleQuery] = useState('');
   const [genreFilter, setGenreFilter] = useState('');
   const [loading, setLoading] = useState(false);
-  const [recentBooks, setRecentBooks] = useState([]);
-  const [categorizedBooks, setCategorizedBooks] = useState([]);
+  const [clickedBooks, setClickedBooks] = useState([]);
 
+  // Recuperar datos del localStorage al montar el componente
   useEffect(() => {
-    const storedRecentBooks = JSON.parse(localStorage.getItem('recentBooks')) || [];
-    setRecentBooks(storedRecentBooks);
-
-    const storedCategorizedBooks = JSON.parse(localStorage.getItem('categorizedBooks')) || [];
-    setCategorizedBooks(storedCategorizedBooks);
+    const storedClickedBooks = JSON.parse(localStorage.getItem('clickedBooks')) || [];
+    setClickedBooks(storedClickedBooks);
   }, []);
+
+  // Guardar datos en el localStorage cada vez que cambien
+  useEffect(() => {
+    localStorage.setItem('clickedBooks', JSON.stringify(clickedBooks));
+  }, [clickedBooks]);
 
   useEffect(() => {
     if (titleQuery || genreFilter) {
@@ -30,10 +32,6 @@ const Home = () => {
     }
   }, [titleQuery, genreFilter]);
 
-  useEffect(() => {
-    localStorage.setItem('recentBooks', JSON.stringify(recentBooks));
-  }, [recentBooks]);
-
   const handleSearch = (query) => {
     setTitleQuery(query);
   };
@@ -42,18 +40,12 @@ const Home = () => {
     setGenreFilter(genre);
   };
 
-  const handleCategorize = (book) => {
-    const newCategorizedBooks = [book, ...categorizedBooks.filter(b => b.id !== book.id)];
-    localStorage.setItem('categorizedBooks', JSON.stringify(newCategorizedBooks));
-    setCategorizedBooks(newCategorizedBooks);
-  };
-
   const handleBookClick = (book) => {
-    const newRecentBooks = [book, ...recentBooks.filter(b => b.id !== book.id)];
-    if (newRecentBooks.length > 5) {
-      newRecentBooks.pop(); // Descarta el libro más antiguo si ya hay 5 libros
+    const newClickedBooks = [book, ...clickedBooks.filter(b => b.id !== book.id)];
+    if (newClickedBooks.length > 5) {
+      newClickedBooks.pop(); // Descarta el libro más antiguo si ya hay 5 libros
     }
-    setRecentBooks(newRecentBooks);
+    setClickedBooks(newClickedBooks);
   };
 
   return (
@@ -61,11 +53,9 @@ const Home = () => {
       <h1>Buscador de Libros</h1>
       <SearchBar onSearch={handleSearch} />
       <FilterBar onFilter={handleFilter} />
-      {loading ? <p>Cargando...</p> : <BookList books={books} onCategorize={handleCategorize} onBookClick={handleBookClick} />}
-      <h2>Últimos 5 Libros Consultados</h2>
-      <BookList books={recentBooks} />
-      <h2>Libros Categorizados</h2>
-      <BookList books={categorizedBooks} />
+      {loading ? <p>Cargando...</p> : <BookList books={books} onBookClick={handleBookClick} />}
+      <h2>Últimos 5 Libros Buscados:</h2>
+      <BookList books={clickedBooks} />
     </div>
   );
 };
