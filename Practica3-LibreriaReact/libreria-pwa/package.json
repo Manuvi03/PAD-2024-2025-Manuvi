@@ -1,6 +1,7 @@
 {
   "name": "libreria-pwa",
   "version": "0.1.0",
+  "homepage": "http://Manuvi03.github.io/PAD-2024-2025-Manuvi",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -8,6 +9,7 @@
     "@testing-library/user-event": "^14.5.2",
     "axios": "^1.7.9",
     "framer-motion": "^11.13.1",
+    "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.2",
@@ -16,6 +18,8 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
