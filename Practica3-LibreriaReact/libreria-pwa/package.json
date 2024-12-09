@@ -1,7 +1,7 @@
 {
   "name": "libreria-pwa",
   "version": "0.1.0",
-  "homepage": "http://Manuvi03.github.io/PAD-2024-2025-Manuvi",
+  "homepage": "http://Manuvi03/PAD-2024-2025-Manuvi/tree/master/pr1/Practica3-LibreriaReact/libreria-pwa",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",
